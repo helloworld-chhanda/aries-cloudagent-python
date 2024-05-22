@@ -4,7 +4,7 @@ from .....core.profile import Profile
 from .....messaging.base_handler import BaseHandler, HandlerException
 from .....messaging.request_context import RequestContext
 from .....messaging.responder import BaseResponder
-from .....storage.error import StorageNotFoundError, StorageDuplicateError
+from .....storage.error import StorageNotFoundError
 from .....wallet.error import WalletNotFoundError
 from ..manager import MediationManager
 from ..messages.keylist_update_response import KeylistUpdateResponse
@@ -48,7 +48,7 @@ class KeylistUpdateResponseHandler(BaseHandler):
                 )
                 for updated in response.updated
             }
-        except (StorageNotFoundError, WalletNotFoundError, StorageDuplicateError) as err:
+        except (StorageNotFoundError, WalletNotFoundError) as err:
             raise HandlerException(
                 "Unknown recipient key received in keylist update response"
             ) from err
